@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container padre">
 <div class="row contenido">
 <div class="col-6 form">
 <form @submit.prevent="agregarPersona">
@@ -39,7 +39,7 @@
 </div>
 </div>
 
-<div class="row">
+<div class="row lista">
     <div class="col-12">
         <h3>Personas Seleccionadas:</h3>
         <ul>
@@ -53,7 +53,6 @@
 </template>
 
 <script setup>
-
 import { ref } from 'vue';
 
 const nombre = ref('');
@@ -78,14 +77,22 @@ const adicionarPersona = (persona) => {
         alert('la persona ya esta en la lista.')
     }
 };
-
 </script>
 
 <style scoped>
+
+.padre{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
  .contenido{
     width: 100%;
     height: auto;
-    display: flex;
     justify-content: center;
     align-items: center;
     color: white;
@@ -94,9 +101,12 @@ const adicionarPersona = (persona) => {
     margin-top: 50px;
  }
 
-
  .form{
     width: 40%;
+ }
+
+ .lista{
+    width: 100%;
  }
 
  h3{
@@ -116,7 +126,5 @@ const adicionarPersona = (persona) => {
     color: black;
     font-weight: 600;
  }
-
- 
 
 </style>
