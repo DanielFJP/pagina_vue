@@ -114,7 +114,7 @@ const adicionarPersona = (persona) => {
     margin-bottom: 5px;
     border-radius: 5px;
     color: black;
-    font-weight: 800;
+    font-weight: 600;
  }
 
  
