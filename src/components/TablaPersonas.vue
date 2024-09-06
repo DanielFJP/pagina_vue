@@ -1,7 +1,6 @@
 <template>
-<div class="container contenido">
-<div class="row">
-
+<div class="container">
+<div class="row contenido">
 <div class="col-6 form">
 <form @submit.prevent="agregarPersona">
   <div class="mb-3">
@@ -23,6 +22,7 @@
       <th scope="col">#</th>
       <th scope="col">Nombre</th>
       <th scope="col">Edad</th>
+      <th scope="col">Agregar</th>
     </tr>
   </thead>
   <tbody>
@@ -30,11 +30,25 @@
        <th scope="row">{{ index + 1 }}</th>
        <td>{{ persona.nombre }}</td>
        <td>{{ persona.edad }}</td>
+       <td>
+        <button @click="adicionarPersona(persona)" class="btn btn-success">Adicionar</button>
+       </td>
     </tr>
   </tbody>
 </table>
-            </div>
-        </div>
+</div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h3>Personas Seleccionadas:</h3>
+        <ul>
+            <li v-for="(persona, index) in personasSeleccionadas" :key="index">
+                {{ persona.nombre }} - {{ persona.edad }} años.
+            </li>
+        </ul>
+    </div>
+</div>
     </div>
 </template>
 
@@ -45,6 +59,7 @@ import { ref } from 'vue';
 const nombre = ref('');
 const edad = ref('');
 const personas = ref([]);
+const personasSeleccionadas = ref([]);
 
 const agregarPersona = () => {
   if (nombre.value && edad.value) {
@@ -56,28 +71,52 @@ const agregarPersona = () => {
   }
 };
 
-
+const adicionarPersona = (persona) => {
+    if (!personasSeleccionadas.value.includes(persona)) {
+        personasSeleccionadas.value.push(persona);
+    } else {
+        alert('la persona ya esta en la lista.')
+    }
+};
 
 </script>
 
 <style scoped>
  .contenido{
     width: 100%;
-    height: 100vh;
+    height: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-
- }
-
- .row{
-    width: 100%;
     gap: 30px;
+    margin-bottom: 50px;
+    margin-top: 50px;
  }
+
 
  .form{
     width: 40%;
  }
+
+ h3{
+   color: white;
+ }
+
+ ul{
+    padding-left: 0;
+    list-style-type: none;
+ }
+
+ li{
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 800;
+ }
+
+ 
 
 </style>
